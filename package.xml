@@ -3,12 +3,20 @@
 <package format="3">
   <name>swd_starter_kit_bringup</name>
   <version>1.1.0</version>
-  <description>Package swd_starter_kit_bringup</description>
+  <description>The swd_starter_kit_bringup package</description>
 
+  <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <maintainer email="gregory.mermet@idec.com">Gregory MERMET</maintainer>
+  <maintainer email="a.bougouffa@ez-wheel.com">Abdelhak BOUGOUFFA</maintainer>
 
+  <!-- One license tag required, multiple allowed, one license per tag -->
+  <!-- Commonly used license strings: -->
   <!--   BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1, LGPLv3 -->
   <license>LGPLv2.1</license>
+
+  <!-- Author tags are optional, multiple are allowed, one per tag -->
+  <!-- Authors do not have to be maintainers, but could be -->
+  <author email="a.bougouffa@ez-wheel.com">Abdelhak BOUGOUFFA</author>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
