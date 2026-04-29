@@ -40,7 +40,6 @@ def generate_launch_description():
             "odom_frame": LaunchConfiguration("odom_frame_id"),
         }.items()
     )
-    launch_args.append( diff_drive_controller )
 
     # Include LiDAR launch file
     bringup_launch_dir = get_package_share_directory('swd_starter_kit_bringup')
@@ -51,38 +50,24 @@ def generate_launch_description():
             "sensor_ip": LaunchConfiguration("lidar_sensor_ip")
         }.items()
     )
-    launch_args.append( lidar_launch )
-
-    # Multiplexer Node:
-    launch_args.append( Node(
-        package= "basic_node",
-        executable= "multiplexer"
-    ))
 
     # Joystick teleoperation include launch
-    launch_args.append( Node(
-            package='joy',
-            executable='joy_node'
-    ))
-    launch_args.append( Node(
-            package='teleop_twist_joy',
-            executable='teleop_node',
-            parameters=[
-                {"axis_linear.x": 1},
-                {"scale_linear.x": 0.6},
-                {"axis_angular.yaw": 3},
-                {"scale_angular.yaw": 3.0}
-            ],
-            remappings=[
-                ("cmd_vel", "multi/cmd_teleop")
-            ]
-    ))
+    joystick_launch_dir = get_package_share_directory('teleop_twist_joy')
+    joystick_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource( joystick_launch_dir + "/launch/teleop-launch.py"),
+        launch_arguments={"joy_config": LaunchConfiguration("joy_config")}.items(),
+        condition=IfCondition(LaunchConfiguration("enable_joystick"))
+    )
 
-    # Robot description include launch
+    # Joystick teleoperation include launch
     robot_description_launch_dir = get_package_share_directory('swd_starter_kit_description')
     robot_description_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource( robot_description_launch_dir + "/launch/robot_description.launch.py")
     )
-    launch_args.append(robot_description_launch)
 
-    return LaunchDescription(launch_args)
+    return LaunchDescription(launch_args + [
+        diff_drive_controller,
+        lidar_launch,
+        joystick_launch,
+        robot_description_launch,
+    ])
