@@ -53,7 +53,12 @@ def generate_launch_description():
     )
     launch_args.append( lidar_launch )
 
-    # Multiplexer Node:
+    # IMT MobiSyst Nodes:
+    launch_args.append( Node(
+        package= "multibot_domid",
+        executable= "parasit"
+    ))
+
     launch_args.append( Node(
         package= "basic_node",
         executable= "multiplexer"
@@ -69,9 +74,9 @@ def generate_launch_description():
             executable='teleop_node',
             parameters=[
                 {"axis_linear.x": 1},
-                {"scale_linear.x": 0.6},
+                {"scale_linear.x": 1.0},
                 {"axis_angular.yaw": 3},
-                {"scale_angular.yaw": 3.0}
+                {"scale_angular.yaw": 6.0}
             ],
             remappings=[
                 ("cmd_vel", "multi/cmd_teleop")
