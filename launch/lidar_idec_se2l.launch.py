@@ -13,7 +13,9 @@ def generate_launch_description():
         executable="urg_node_driver",
         name="urg_node_driver",
         parameters=[
-            {"ip_address": LaunchConfiguration("sensor_ip")}
+            {"ip_address": LaunchConfiguration("sensor_ip")},
+            {"angle_min": -2.1},
+            {"angle_max": 2.1}
         ]
     )
 
