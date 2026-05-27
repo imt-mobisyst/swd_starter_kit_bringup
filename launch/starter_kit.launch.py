@@ -64,10 +64,10 @@ def generate_launch_description():
         executable= "multiplexer"
     ))
 
-    #launch_args.append( Node(
-    #    package= "basic_node",
-    #    executable= "tfstatic_repeater"
-    #))
+    launch_args.append( Node(
+        package= "basic_node",
+        executable= "tfstatic_repeater"
+    ))
 
     # Joystick teleoperation include launch
     launch_args.append( Node(
